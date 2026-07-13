@@ -1,0 +1,930 @@
+{
+  "info": {
+    "_postman_id": "35ce110c-df54-45ce-b7a3-46906653b6bc",
+    "name": "[EXTERNAL] Xenith APIs",
+    "description": "# Welcome to Xenith APIs!\n\nThis Postman Collection provides you easy access to Xenith API products, from Balances, Pay Ins, and Pay Outs.\n\n## Get Started\n\n1. Create a Xenith account\n    \n2. Log in to your Xenith account\n    \n3. Visit [Developer Settings page](https://app.staging.xenithpay.com/developer-settings) to generate API keys. Store both the secret and access key securely\n    \n4. Create a new Postman environment with the following variables: `secret_key` and `access_key`, and [<code>uri</code>](https://docs.xenithpay.com/docs/environments)\n    \n5. This postman collection has a pre-script built-in in Scripts section to generate signature automatically to access Xenith's APIs. All you need is to provide the value of `secret_key`, `access_key`, and `uri` correctly in the Environment variable\n    \n6. Make your first API call by hitting one of the APIs provided in this collection!",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "48445734",
+    "_collection_link": "https://go.postman.co/collection/48445734-35ce110c-df54-45ce-b7a3-46906653b6bc?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Balances",
+      "item": [
+        {
+          "name": "Get Balances",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Xenith-Merchant-Id",
+                "value": "mc-01JRSP41F6P7ZR13RSABGBJ92R",
+                "disabled": true
+              },
+              {
+                "key": "Xenith-Api-Key",
+                "value": "{{access_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Timestamp",
+                "value": "{{request_timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Signature",
+                "value": "{{request_signature}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{uri}}/v1/balances",
+              "host": [
+                "{{uri}}"
+              ],
+              "path": [
+                "v1",
+                "balances"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Pay Ins",
+      "item": [
+        {
+          "name": "Get Pay In Channels",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Xenith-Merchant-Id",
+                "value": "mc-01JRSP41F6P7ZR13RSABGBJ92R",
+                "disabled": true
+              },
+              {
+                "key": "Xenith-Api-Key",
+                "value": "{{access_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Timestamp",
+                "value": "{{request_timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Signature",
+                "value": "{{request_signature}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{uri}}/v1/payins/channels?currency=VND",
+              "host": [
+                "{{uri}}"
+              ],
+              "path": [
+                "v1",
+                "payins",
+                "channels"
+              ],
+              "query": [
+                {
+                  "key": "currency",
+                  "value": "VND"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Pay in Detail by ID",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Xenith-Merchant-Id",
+                "value": "mc-01JRSP41F6P7ZR13RSABGBJ92R",
+                "disabled": true
+              },
+              {
+                "key": "Xenith-Api-Key",
+                "value": "{{access_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Timestamp",
+                "value": "{{request_timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Signature",
+                "value": "{{request_signature}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-Idempotency-Key",
+                "value": "{{idempotencyKey}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{uri}}/v1/payins/:id",
+              "host": [
+                "{{uri}}"
+              ],
+              "path": [
+                "v1",
+                "payins",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Pay In Request",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Xenith-Merchant-Id",
+                "value": "mc-01JRSP41F6P7ZR13RSABGBJ92R",
+                "disabled": true
+              },
+              {
+                "key": "Xenith-Api-Key",
+                "value": "{{access_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Timestamp",
+                "value": "{{request_timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Signature",
+                "value": "{{request_signature}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-Idempotency-Key",
+                "value": "{{idempotencyKey}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"initiatedAmount\": 10000,\n  \"currency\": \"VND\",\n  \"paymentMethod\": \"QR_CODE\",\n  \"paymentChannel\": \"VIETQR\",\n  \"referenceCode\": \"reference-20260130-00002\",\n  \"customerReference\": \"customer-reference-20260130-00002\",\n  \"customerName\": \"Merchant Staging Testing\",\n  \"description\": \"Hello, I'm testing Xenith Payins API\",\n  \"callbackUrl\": \"https://webhook.site/0209f1c1-e7a9-4520-80ca-288f925629b9\",\n  \"redirectUrl\": \"https://google.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{uri}}/v1/payins",
+              "host": [
+                "{{uri}}"
+              ],
+              "path": [
+                "v1",
+                "payins"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Simulate Pay In",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Xenith-Merchant-Id",
+                "value": "mc-01JRSP41F6P7ZR13RSABGBJ92R",
+                "disabled": true
+              },
+              {
+                "key": "Xenith-Api-Key",
+                "value": "{{access_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Timestamp",
+                "value": "{{request_timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Signature",
+                "value": "{{request_signature}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-Idempotency-Key",
+                "value": "{{idempotencyKey}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"transactionId\": \"\",\n    \"transactionCategory\": \"payins\",\n    \"transactionStatus\": \"SUCCESS\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{uri}}/v1/simulator/transaction",
+              "host": [
+                "{{uri}}"
+              ],
+              "path": [
+                "v1",
+                "simulator",
+                "transaction"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Pay Outs",
+      "item": [
+        {
+          "name": "Get Pay Out Channels",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Xenith-Merchant-Id",
+                "value": "mc-01JRSP41F6P7ZR13RSABGBJ92R",
+                "disabled": true
+              },
+              {
+                "key": "Xenith-Api-Key",
+                "value": "{{access_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Timestamp",
+                "value": "{{request_timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Signature",
+                "value": "{{request_signature}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{uri}}/v1/payouts/channels?currency=IDR",
+              "host": [
+                "{{uri}}"
+              ],
+              "path": [
+                "v1",
+                "payouts",
+                "channels"
+              ],
+              "query": [
+                {
+                  "key": "currency",
+                  "value": "IDR"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sync Account Inquiry",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Xenith-Merchant-Id",
+                "value": "mc-01JRSP41F6P7ZR13RSABGBJ92R",
+                "disabled": true
+              },
+              {
+                "key": "Xenith-Api-Key",
+                "value": "{{access_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Timestamp",
+                "value": "{{request_timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Signature",
+                "value": "{{request_signature}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"currency\": \"VND\",\n    \"destinationPayoutMethod\": \"BANK_TRANSFER\",\n    \"destinationPayoutChannel\": \"BIDVVNVX\",\n    \"destinationPayoutAccount\": \"99991010100011\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{uri}}/v1/account-inquiry/sync",
+              "host": [
+                "{{uri}}"
+              ],
+              "path": [
+                "v1",
+                "account-inquiry",
+                "sync"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Async Account Inquiry",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Xenith-Merchant-Id",
+                "value": "mc-01JRSP41F6P7ZR13RSABGBJ92R",
+                "disabled": true
+              },
+              {
+                "key": "Xenith-Api-Key",
+                "value": "{{access_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Timestamp",
+                "value": "{{request_timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Signature",
+                "value": "{{request_signature}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"currency\": \"VND\",\n    \"destinationPayoutMethod\": \"BANK_TRANSFER\",\n    \"destinationPayoutChannel\": \"BFTVVNVX\",\n    \"destinationPayoutAccount\": \"4647280398\",\n    \"callbackUrl\": \"https://webhook.site/0209f1c1-e7a9-4520-80ca-288f925629b9\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{uri}}/v1/account-inquiry/async",
+              "host": [
+                "{{uri}}"
+              ],
+              "path": [
+                "v1",
+                "account-inquiry",
+                "async"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Pay Out Request",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Xenith-Merchant-Id",
+                "value": "mc-01JRSP41F6P7ZR13RSABGBJ92R",
+                "disabled": true
+              },
+              {
+                "key": "Xenith-Api-Key",
+                "value": "{{access_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Timestamp",
+                "value": "{{request_timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Signature",
+                "value": "{{request_signature}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "X-Idempotency-key",
+                "value": "{{idempotencyKey}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"initiatedAmount\": 10000,\n    \"currency\": \"VND\",\n    \"destinationPayoutMethod\": \"BANK_TRANSFER\",\n    \"destinationPayoutChannel\": \"BFTVVNVX\",\n    \"destinationPayoutAccount\": \"555518986412\",\n    \"destinationPayoutAccountName\": \"Nguyen Hoang Nam\",\n    \"referenceCode\": \"reference-20260130-00001\",\n    \"customerReference\": \"customer-reference-20260130-00001\",\n    \"description\": \"Hi, I'm testing Xenith Payouts API\",\n    \"callbackUrl\": \"https://webhook.site/0209f1c1-e7a9-4520-80ca-288f925629b9\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{uri}}/v1/payouts",
+              "host": [
+                "{{uri}}"
+              ],
+              "path": [
+                "v1",
+                "payouts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Pay Out Detail by ID",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Xenith-Merchant-Id",
+                "value": "mc-01JRSP41F6P7ZR13RSABGBJ92R",
+                "disabled": true
+              },
+              {
+                "key": "Xenith-Api-Key",
+                "value": "{{access_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Timestamp",
+                "value": "{{request_timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Signature",
+                "value": "{{request_signature}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{uri}}/v1/payouts/:id",
+              "host": [
+                "{{uri}}"
+              ],
+              "path": [
+                "v1",
+                "payouts",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Pay Outs List",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Xenith-Merchant-Id",
+                "value": "mc-01JRSP41F6P7ZR13RSABGBJ92R",
+                "disabled": true
+              },
+              {
+                "key": "Xenith-Api-Key",
+                "value": "{{access_key}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Timestamp",
+                "value": "{{request_timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "Xenith-Request-Signature",
+                "value": "{{request_signature}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{uri}}/v1/payouts/:id",
+              "host": [
+                "{{uri}}"
+              ],
+              "path": [
+                "v1",
+                "payouts",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          "function generateRandomString(length) {",
+          "    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';",
+          "    let result = '';",
+          "    for (let i = 0; i < length; i++) {",
+          "        result += characters.charAt(Math.floor(Math.random() * characters.length));",
+          "    }",
+          "    return result;",
+          "}",
+          "",
+          "const randomString = generateRandomString(100);",
+          "pm.environment.set('idempotencyKey', randomString);",
+          "",
+          "// VERSION 2",
+          "",
+          "/*",
+          " * Pre-request script for generating signature payload with minified JSON body.",
+          " */",
+          "",
+          "",
+          "// Get the current timestamp in RFC3339 format",
+          "const timestamp = new Date().toISOString();",
+          "console.log(\"timestamp:\", timestamp);",
+          "",
+          "// Get the request method and URI",
+          "const method = pm.request.method;",
+          "console.log(\"method:\", method);",
+          "const uri = pm.request.url.getPathWithQuery();",
+          "console.log(\"uri:\", uri);",
+          "",
+          "// Initialize minifiedBody as an empty string",
+          "let minifiedBody = \"\";",
+          "",
+          "// Check if request body exists and is not empty",
+          "if (pm.request.body && pm.request.body.raw) {",
+          "    try {",
+          "        // Attempt to parse and minify the JSON body",
+          "        const parsedBody = JSON.parse(pm.request.body.raw);",
+          "        minifiedBody = JSON.stringify(parsedBody);",
+          "    } catch (error) {",
+          "        // If the body is not valid JSON, log an error and use the raw body",
+          "        console.error(\"Error parsing JSON body. Using raw body instead.\");",
+          "        minifiedBody = pm.request.body.raw;",
+          "    }",
+          "}",
+          "",
+          "console.log(\"minifiedBody:\", minifiedBody);",
+          "",
+          "// Concatenate method, URI, timestamp, and minified body to form the signature payload",
+          "const signaturePayload = method + \"\\n\" + uri + \"\\n\" + timestamp + \"\\n\" + minifiedBody;",
+          "console.log(\"signaturePayload:\", signaturePayload);",
+          "",
+          "// Retrieve the secret key from the environment",
+          "const secretKey = pm.environment.get(\"secret_key\");",
+          "console.log(\"Secret key:\", secretKey);",
+          "",
+          "// Create a HMAC SHA256 hash of the signature payload using the secret key",
+          "const hash = CryptoJS.HmacSHA256(signaturePayload, secretKey);",
+          "",
+          "// Encode the hash in base64 format",
+          "const signature = CryptoJS.enc.Base64.stringify(hash);",
+          "console.log(\"signature:\", signature);",
+          "",
+          "// Set the timestamp and signature as environment variables for later use",
+          "pm.environment.set(\"request_timestamp\", timestamp);",
+          "pm.environment.set(\"request_signature\", signature);"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
