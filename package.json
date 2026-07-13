@@ -1,6 +1,6 @@
 {
   "name": "xenithpay-sdk",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "XenithCore library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
