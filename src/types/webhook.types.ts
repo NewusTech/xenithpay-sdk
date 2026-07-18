@@ -42,7 +42,7 @@ export type PayInWebhookData = {
   errorMessage: string;
 };
 
-export interface PayInWebhookPayload extends WebhookPayload<PayInWebhookData> {}
+export type PayInWebhookPayload = WebhookPayload<PayInWebhookData>;
 
 // --- Pay In Maintenance Webhook ---
 
@@ -77,7 +77,7 @@ export type PayOutWebhookData = {
   errorMessage: string;
 };
 
-export interface PayOutWebhookPayload extends WebhookPayload<PayOutWebhookData> {}
+export type PayOutWebhookPayload = WebhookPayload<PayOutWebhookData>;
 
 // --- Pay Out Maintenance Webhook ---
 

@@ -117,7 +117,6 @@ function timingSafeEqual(expected: string, actual: string): boolean {
   // does not reveal how many characters matched.
   let mismatch = expected.length !== actual.length ? 1 : 0;
   for (let i = 0; i < expected.length; i++) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     mismatch |= expected.charCodeAt(i) ^ (actual.charCodeAt(i) ?? 0);
   }
   return mismatch === 0;
