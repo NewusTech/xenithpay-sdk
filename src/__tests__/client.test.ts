@@ -142,6 +142,10 @@ describe('client.payins', () => {
       paymentMethod: 'QR_CODE',
       paymentChannel: 'VIETQR',
       referenceCode: 'ref-001',
+      customerReference: 'cust-ref-001',
+      customerName: 'Customer Test',
+      callbackUrl: 'https://example.com/callback',
+      redirectUrl: 'https://example.com/redirect',
     });
 
     expect(result).toEqual(fakeResponse);

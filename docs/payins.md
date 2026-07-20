@@ -126,16 +126,18 @@ create(body: CreatePayInRequest, idempotencyKey?: string): Promise<CreatePayInRe
 
 | Field | Type | Required | Keterangan |
 |---|---|---|---|
-| `initiatedAmount` | `number` | ✅ | Nominal transaksi (dalam satuan terkecil mata uang) |
-| `currency` | `string` | ✅ | Kode mata uang, e.g. `"VND"`, `"IDR"` |
+| `initiatedAmount` | `number` | ✅ | Nominal transaksi dalam mata uang terkait |
+| `currency` | `string` | ✅ | Kode mata uang ISO 4217, e.g. `"VND"`, `"IDR"` |
 | `paymentMethod` | `string` | ✅ | Metode pembayaran, e.g. `"QR_CODE"` |
 | `paymentChannel` | `string` | ✅ | Channel pembayaran, e.g. `"VIETQR"` |
 | `referenceCode` | `string` | ✅ | Reference ID unik dari merchant (untuk rekonsiliasi) |
-| `customerReference` | `string` | ❌ | Reference ID dari sisi customer |
-| `customerName` | `string` | ❌ | Nama customer |
+| `customerReference` | `string` | ✅ | Reference ID dari sisi customer |
+| `customerName` | `string` | ✅ | Nama customer (minimum 5 karakter) |
+| `callbackUrl` | `string` | ✅ | URL webhook untuk menerima notifikasi status pembayaran |
+| `redirectUrl` | `string` | ✅ | URL redirect setelah customer menyelesaikan pembayaran |
+| `customerPhoneNumber` | `string` | ❌ | Nomor telepon customer (Wajib untuk channel OVO & PKR) |
 | `description` | `string` | ❌ | Deskripsi transaksi |
-| `callbackUrl` | `string` | ❌ | URL webhook untuk menerima notifikasi status pembayaran |
-| `redirectUrl` | `string` | ❌ | URL redirect setelah customer menyelesaikan pembayaran |
+| `metadata` | `object` | ❌ | Metadata spesifik channel (CNY, KRW, LAK, THB) |
 
 | Parameter | Type | Required | Keterangan |
 |---|---|---|---|

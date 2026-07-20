@@ -198,16 +198,18 @@ const payin = await client.payins.create({
 
 | Field | Type | Required | Keterangan |
 |---|---|---|---|
-| `initiatedAmount` | `number` | ✅ | Nominal transaksi |
-| `currency` | `string` | ✅ | Kode mata uang, e.g. `"VND"` |
+| `initiatedAmount` | `number` | ✅ | Nominal transaksi dalam mata uang terkait |
+| `currency` | `string` | ✅ | Kode mata uang ISO 4217, e.g. `"VND"` |
 | `paymentMethod` | `string` | ✅ | e.g. `"QR_CODE"` |
 | `paymentChannel` | `string` | ✅ | e.g. `"VIETQR"` |
 | `referenceCode` | `string` | ✅ | Reference unik dari merchant |
-| `customerReference` | `string` | ❌ | Reference dari customer |
-| `customerName` | `string` | ❌ | Nama customer |
+| `customerReference` | `string` | ✅ | Reference ID customer dari merchant |
+| `customerName` | `string` | ✅ | Nama customer (min. 5 karakter) |
+| `callbackUrl` | `string` | ✅ | URL webhook notifikasi transaksi |
+| `redirectUrl` | `string` | ✅ | URL redirect setelah transaksi selesai |
+| `customerPhoneNumber` | `string` | ❌ | Nomor HP customer (Wajib untuk OVO/PKR) |
 | `description` | `string` | ❌ | Deskripsi transaksi |
-| `callbackUrl` | `string` | ❌ | URL webhook notifikasi |
-| `redirectUrl` | `string` | ❌ | URL redirect setelah pembayaran |
+| `metadata` | `object` | ❌ | Metadata tambahan spesifik payment channel |
 
 | Parameter | Type | Required | Keterangan |
 |---|---|---|---|

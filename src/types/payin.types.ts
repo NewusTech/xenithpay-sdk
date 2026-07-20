@@ -19,17 +19,30 @@ export type GetPayInChannelsResponse = PayInChannel[];
 
 // --- Create Pay In ---
 
+export interface PayInMetadata {
+  bankAccountName?: string;
+  bankAccountNumber?: string;
+  bankId?: string;
+  mobile?: string;
+  email?: string;
+  ipAddress?: string;
+  dateOfBirth?: string;
+  [key: string]: unknown;
+}
+
 export interface CreatePayInRequest {
   initiatedAmount: number;
   currency: string;
   paymentMethod: string;
   paymentChannel: string;
   referenceCode: string;
-  customerReference?: string;
-  customerName?: string;
+  customerReference: string;
+  customerName: string;
+  callbackUrl: string;
+  redirectUrl: string;
+  customerPhoneNumber?: string;
   description?: string;
-  callbackUrl?: string;
-  redirectUrl?: string;
+  metadata?: PayInMetadata | Record<string, unknown>;
   [key: string]: unknown;
 }
 
@@ -43,11 +56,13 @@ export interface CreatePayInResponse {
   referenceCode: string;
   customerReference?: string;
   customerName?: string;
+  customerPhoneNumber?: string;
   description?: string;
   callbackUrl?: string;
   redirectUrl?: string;
   checkoutUrl?: string;
   qrCode?: string;
+  metadata?: PayInMetadata | Record<string, unknown>;
   createdAt: string;
   updatedAt: string;
   [key: string]: unknown;
