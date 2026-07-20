@@ -1,5 +1,5 @@
-import { createHmac } from 'crypto';
-import type { VerifyWebhookResult, WebhookPayload } from './types';
+import { createHmac, timingSafeEqual as cryptoTimingSafeEqual } from "crypto";
+import type { VerifyWebhookResult, WebhookPayload } from "./types";
 
 /**
  * Default maximum age (in seconds) for a webhook timestamp before it is
@@ -57,21 +57,25 @@ export class WebhookValidator {
     signature: string | undefined;
     toleranceSeconds?: number;
   }): VerifyWebhookResult {
-    const { method, urlPath, rawBody, timestamp, signature, toleranceSeconds } = options;
+    const { method, urlPath, rawBody, timestamp, signature, toleranceSeconds } =
+      options;
     const tolerance = toleranceSeconds ?? DEFAULT_TOLERANCE_SECONDS;
 
     // --- 1. Validate headers are present ---
     if (!timestamp) {
-      return { valid: false, reason: 'Missing X-Xenith-Timestamp header' };
+      return { valid: false, reason: "Missing X-Xenith-Timestamp header" };
     }
     if (!signature) {
-      return { valid: false, reason: 'Missing X-Xenith-Signature header' };
+      return { valid: false, reason: "Missing X-Xenith-Signature header" };
     }
 
     // --- 2. Check timestamp is within tolerance to prevent replay attacks ---
     const webhookTime = new Date(timestamp).getTime();
     if (isNaN(webhookTime)) {
-      return { valid: false, reason: 'Invalid X-Xenith-Timestamp format (expected RFC 3339)' };
+      return {
+        valid: false,
+        reason: "Invalid X-Xenith-Timestamp format (expected RFC 3339)",
+      };
     }
 
     const ageSeconds = (Date.now() - webhookTime) / 1000;
@@ -85,13 +89,13 @@ export class WebhookValidator {
     // --- 3. Compute expected signature ---
     // Format: METHOD\nURL_PATH\nREQUEST_BODY\nTIMESTAMP
     const payload = `${method.toUpperCase()}\n${urlPath}\n${rawBody}\n${timestamp}`;
-    const expectedSignature = createHmac('sha256', this.webhookSecret)
-      .update(payload)
-      .digest('base64');
+    const expectedSignature = createHmac("sha256", this.webhookSecret)
+      .update(payload, "utf-8")
+      .digest("base64");
 
     // --- 4. Compare signatures using timing-safe comparison ---
     if (!timingSafeEqual(expectedSignature, signature)) {
-      return { valid: false, reason: 'Signature mismatch' };
+      return { valid: false, reason: "Signature mismatch" };
     }
 
     // --- 5. Parse and return the payload ---
@@ -99,7 +103,7 @@ export class WebhookValidator {
     try {
       parsed = JSON.parse(rawBody) as WebhookPayload;
     } catch {
-      return { valid: false, reason: 'Failed to parse webhook body as JSON' };
+      return { valid: false, reason: "Failed to parse webhook body as JSON" };
     }
 
     return { valid: true, payload: parsed };
@@ -107,17 +111,13 @@ export class WebhookValidator {
 }
 
 /**
- * Compares two strings in constant time to prevent timing attacks.
- * Avoids using Buffer.from() to stay compatible with edge runtimes
- * by falling back to a character-by-character comparison that always
- * iterates the full length of the expected string.
+ * Compares two strings in constant time to prevent timing attacks using Buffer and crypto.timingSafeEqual.
  */
 function timingSafeEqual(expected: string, actual: string): boolean {
-  // Always iterate over the full expected length so the loop duration
-  // does not reveal how many characters matched.
-  let mismatch = expected.length !== actual.length ? 1 : 0;
-  for (let i = 0; i < expected.length; i++) {
-    mismatch |= expected.charCodeAt(i) ^ (actual.charCodeAt(i) ?? 0);
-  }
-  return mismatch === 0;
+  const computedBytes = Buffer.from(expected, "utf8");
+  const receivedBytes = Buffer.from(actual, "utf8");
+  return (
+    computedBytes.length === receivedBytes.length &&
+    cryptoTimingSafeEqual(computedBytes, receivedBytes)
+  );
 }
