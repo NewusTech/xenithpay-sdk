@@ -9,6 +9,7 @@ TypeScript SDK untuk Xenith Payment API.
 - [Balances](./balances.md) — Mengambil saldo akun merchant
 - [Pay Ins](./payins.md) — Menerima pembayaran (Pay In)
 - [Pay Outs](./payouts.md) — Mengirim dana (Pay Out)
+- [CI/CD Pipeline](./cicd.md) — Alur kerja pengujian, keamanan, dan publikasi otomatis paket SDK
 
 ## Contoh Kode
 
