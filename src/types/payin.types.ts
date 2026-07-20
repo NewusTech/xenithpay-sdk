@@ -30,6 +30,7 @@ export interface CreatePayInRequest {
   description?: string;
   callbackUrl?: string;
   redirectUrl?: string;
+  [key: string]: unknown;
 }
 
 export interface CreatePayInResponse {
@@ -60,8 +61,8 @@ export type GetPayInDetailResponse = CreatePayInResponse;
 
 export interface SimulatePayInRequest {
   transactionId: string;
-  transactionCategory: 'payins' | string;
-  transactionStatus: 'SUCCESS' | 'FAILED' | string;
+  transactionCategory: "payins" | string;
+  transactionStatus: "SUCCESS" | "FAILED" | string;
 }
 
 export interface SimulatePayInResponse {
